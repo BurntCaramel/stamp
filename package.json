@@ -1,0 +1,18 @@
+{
+  "name": "stamp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "dependencies": {
+    "@vercel/node": "^1.7.3",
+    "puppeteer": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/puppeteer": "^3.0.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Patrick Smith",
+  "license": "ISC"
+}
