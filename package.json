@@ -5,7 +5,9 @@
   "main": "index.ts",
   "dependencies": {
     "@vercel/node": "^1.7.3",
-    "puppeteer": "^5.2.1"
+    "htm": "^3.0.4",
+    "puppeteer": "^5.2.1",
+    "vhtml": "^2.2.0"
   },
   "devDependencies": {
     "@types/puppeteer": "^3.0.1"

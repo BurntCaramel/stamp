@@ -1,5 +1,9 @@
 import { NowRequest, NowResponse } from "@vercel/node";
 import puppeteer from "puppeteer";
+import htm from "htm";
+import vhtml from "vhtml";
+
+const html = htm.bind(vhtml);
 
 const browserlessToken = process.env.BROWSERLESS_TOKEN;
 
@@ -10,11 +14,10 @@ function renderHTML({
   headline: string;
   source: string;
 }): string {
-  return `<!DOCTYPE html>
-  <html lang="en">
+  const result = html`<html lang="en">
     <head>
       <meta charset="utf-8" />
-      <link rel="preconnect" href="https://rsms.me">
+      <link rel="preconnect" href="https://rsms.me" />
 
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -31,10 +34,14 @@ function renderHTML({
           text-rendering: optimizeLegibility;
         }
 
-        @import url('https://rsms.me/inter/inter.css');
-        html { font-family: 'Inter', sans-serif; }
+        @import url("https://rsms.me/inter/inter.css");
+        html {
+          font-family: "Inter", sans-serif;
+        }
         @supports (font-variation-settings: normal) {
-          html { font-family: 'Inter var', sans-serif; }
+          html {
+            font-family: "Inter var", sans-serif;
+          }
         }
 
         .cool {
@@ -50,20 +57,27 @@ function renderHTML({
         }
       </style>
     </head>
-    <body class="cool" style="display: flex; justify-content: center; width: 1200px; height: 630px;">
+    <body
+      class="cool"
+      style="display: flex; justify-content: center; width: 1200px; height: 630px;"
+    >
       <div style="display: flex; align-content: stretch; padding: 3rem;">
         <div
           style="display: flex; flex-direction: column; justify-content: center; align-items: center;"
         >
-          <h1 style="font-size: 3rem; color: white;">${escape(headline)}</h1>
+          <h1 style="font-size: 3rem; color: white;">${headline}</h1>
           <div style="height: 2rem;"></div>
-          <h2 style="font-size: 2.5rem; font-weight: bold; color: white;">${escape(
-            source
-          )}</h2>
+          <h2 style="font-size: 2.5rem; font-weight: bold; color: white;">
+            ${source}
+          </h2>
         </div>
       </div>
     </body>
   </html>`;
+
+  const document = new Array<string>().concat(result).join("\n");
+
+  return `<!DOCTYPE html>${document}`;
 }
 
 export default async function poster(req: NowRequest, res: NowResponse) {
