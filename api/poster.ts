@@ -34,9 +34,9 @@ function renderHTML({
           text-rendering: optimizeLegibility;
         }
 
-        @import url("https://rsms.me/inter/inter.css");
+        @import url(https://rsms.me/inter/inter.css);
         html {
-          font-family: "Inter", sans-serif;
+          font-family: Inter, sans-serif;
         }
         @supports (font-variation-settings: normal) {
           html {
@@ -73,7 +73,7 @@ function renderHTML({
         </div>
       </div>
     </body>
-  </html>`;
+  </html>` as string | Array<string>;
 
   const document = new Array<string>().concat(result).join("\n");
 
